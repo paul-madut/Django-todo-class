@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>To-Do List</h2>
+  <p><a href="{% url 'todo_new' %}">Add New To-Do</a></p>
+  <ul>
+    {% for todo in object_list %}
+      <li>{{ todo.title }} - {{ todo.completed|yesno:"Done,Not Done" }}
+          <a href="{% url 'todo_edit' todo.id %}">Edit</a> |
+          <a href="{% url 'todo_delete' todo.id %}">Delete</a>
+      </li>
+    {% empty %}
+      <li>No to-do items.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
